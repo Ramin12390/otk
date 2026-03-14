@@ -85,7 +85,7 @@ async function startExam() {
     loadingOverlay.querySelector('p').textContent = "Suallar 3 fənn üzrə paralel yaradılır (bu daha sürətlidir)...";
 
     try {
-        const difficultyText = "Sən Azərbaycan Respublikasının DİM (Dövlət İmtahan Mərkəzi) üzrə təcrübəli, illərin ali dərəcəli müəllimisən. Sən 10-cu siniflər üçün gerçək, məntiqli, şagirdi dərin düşünməyə vadar edəcək və tam 'Buraxılış Sınaq İmtahanı' (OTK) səviyyəsində suallar hazırlamalısan. Suallar əsla bəsit və ya birbaşa cavablı olmamalıdır! Hər bir sual DİM standartına uyğun, çaşdırıcı variantları olan (bəzən mətnləri analiz edən) formada yazılmalıdır. JSON sintaksisini qəti surətdə pozma. Diqqət: Çoxluq fərqi (\\) işarəsi istifadə etmə, yerinə (fərqi) və ya (-) yaz. Cütün içində cüt dırnaq qoyma. ƏN MÜHÜM QAYDA: Doğru cavabları yalnız A, B, C kimi sıralama. Variantları təmiz qarışdır, 'D' və 'E' bəndləri də mütəmadi şəkildə düzgün cavab olsun. A, B, C, D, E variantları bütün test boyunca təsadüfi (random) paylanmalıdır.";
+        const difficultyText = "Sən Azərbaycan Respublikasının DİM (Dövlət İmtahan Mərkəzi) üzrə təcrübəli, illərin ali dərəcəli müəllimisən. Sən 10-cu siniflər üçün gerçək, məntiqli, şagirdi dərin düşünməyə vadar edəcək və tam 'Buraxılış Sınaq İmtahanı' (OTK) səviyyəsində suallar hazırlamalısan. Suallar əsla bəsit və ya birbaşa cavablı olmamalıdır! Hər bir sual DİM standartına uyğun, çaşdırıcı variantları olan (bəzən mətnləri analiz edən) formada yazılmalıdır. JSON sintaksisini qəti surətdə pozma. Diqqət: Çoxluq fərqi (\\) işarəsi istifadə etmə, yerinə (fərqi) və ya (-) yaz. Cütün içində cüt dırnaq qoyma. ƏN MÜHÜM QAYDA: Doğru cavablar A, B, C, D və E arasında tam bərabər və təsadüfi (random) şəkildə bölüşdürülməlidir. Heç bir spesifik varianta üstünlük verilməməlidir.";
         
         const promptAz = `Sən DİM Azərbaycan dili müəllimisən. 10-cu sinif buraxılış imtahanı üçün cəmi 28 fərqli sual (id 1-dən 28-ə) yarat. ${difficultyText}
 Şərt: 24 ədəd 'closed' (qapalı, 5 variantlı), 4 ədəd 'open_text' (yazılı açıq) sual olacaq. Orta və çətin suallar qarışıq olacaq.
@@ -103,7 +103,7 @@ Statistika: 13 dənə 'closed' (5 variantlı), 5 dənə 'open_text' (kodlaşdır
 1. Modul tənliyi: Məsələn, "|x - 2| > x + 3 həllini tapın." tipli qrafik və xassə tələb edən.
 2. Funksiya minimumları: Məsələn, "f(x) = x² - 4x + 3 funksiyasının minimum nöqtəsində qiyməti nə qədərdir?" tipli diskriminant/vertex məsələləri.
 3. Həndəsə: Məsələn, "Bir üçbucaqda bucaqlar nisbəti 2:3:4-dür. Ən böyük bucaq neçə dərəcədir? (Cavab 96)".
-Bu tipli sualları mütləq daxil et! Qalanları orta səviyyə (nisbət/proqressiya/köklər) olsun. DOĞRU CAVABLAR MÜTLƏQ QARIŞIQ (A, B, C, D, E bərabər) OLMALIDIR. D və E-ni xüsusilə çox sal!
+Bu tipli sualları mütləq daxil et! Qalanları orta səviyyə (nisbət/proqressiya/köklər) olsun. DOĞRU CAVABLAR MÜTLƏQ QARIŞIQ VƏ BƏRABƏR (A, B, C, D, E eyni ehtimalla) OLMALIDIR.
 CAVABIN YALNIZ VƏ YALNIZ JSON ARRAY FORMATINDA OLSUN.
 Closed nümunəsi: {"id": 29, "subject": "Riyaziyyat", "type": "closed", "text": "...", "options": ["A", "B", "C", "D", "E"], "correct": "A", "points": 1}
 Open Solution nümunəsi: {"id": 47, "subject": "Riyaziyyat", "type": "open_solution", "text": "...", "points": 4}`;
@@ -116,7 +116,7 @@ CRITICAL INSTRUCTION: Include these highly tricked, advanced OTK-style questions
 2. Hard Reported Speech backshifts: e.g., "He said: 'I will help you tomorrow.' → Reported: He said that he _____ me the next day. (B: would help)".
 3. Phrasal Verbs/Idioms: e.g., "The workers couldn’t break _____ the employers’ objections. (C: through)".
 Mix these extremely hard types with standard medium ones (Nouns, Quantifiers) so the general audience gets 70-85, but top students struggle on these.
-CRUCIAL: Distribute correct answers completely randomly across A, B, C, D, and E! Force D and E to be correct frequently to avoid ABC clustering!
+CRUCIAL: Distribute correct answers completely randomly and evenly across A, B, C, D, and E without favoring any specific letter!
 RESPOND ONLY AS A VALID JSON ARRAY. NO MARKDOWN TEXT AROUND IT.
 Closed example: {"id": 54, "subject": "İngilis dili", "type": "closed", "text": "...", "options": ["A", "B", "C", "D", "E"], "correct": "B", "points": 1}
 Open Text example: {"id": 78, "subject": "İngilis dili", "type": "open_text", "text": "...", "points": 2}`;
@@ -249,12 +249,15 @@ function renderQuestion(index) {
     
     if (q.type === "closed") {
         html += `<div class="space-y-3">`;
+        const letters = ["A", "B", "C", "D", "E"];
         q.options.forEach((opt, i) => {
-            const isChecked = (answers[index] === opt) ? "checked" : "";
+            const letter = letters[i] || "?";
+            // Allow matching if user previously selected the option text or the letter
+            const isChecked = (answers[index] === letter || answers[index] === opt) ? "checked" : "";
             html += `
                 <label class="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50 transition-colors">
-                    <input type="radio" name="q${q.id}" value="${opt}" class="w-5 h-5 text-blue-600 focus:ring-blue-500" ${isChecked} onchange="setAnswer('${opt}')">
-                    <span class="ml-3 text-gray-700 font-medium">${opt}</span>
+                    <input type="radio" name="q${q.id}" value="${letter}" class="w-5 h-5 text-blue-600 focus:ring-blue-500" ${isChecked} onchange="setAnswer('${letter}')">
+                    <span class="ml-3 text-gray-700 font-medium"><strong>${letter})</strong> ${opt}</span>
                 </label>
             `;
         });
@@ -331,8 +334,26 @@ async function finishExam() {
     // 1. Calculate Closed Questions
     questions.forEach((q, index) => {
         if(q.type === "closed") {
-            if(answers[index] === q.correct) {
-                subjectScores[q.subject].earned += (q.points || 1);
+            const userAns = answers[index]; // e.g. "C"
+            if(userAns) {
+                let isCorrect = false;
+                let c = String(q.correct).trim().toUpperCase();
+                
+                // If AI returns "C", "C)", "c."
+                if (c === userAns || c === userAns + ")" || c === userAns + ".") {
+                    isCorrect = true;
+                }
+                
+                // If AI returned the full text instead of just the letter
+                const letters = ["A", "B", "C", "D", "E"];
+                const userLetterIndex = letters.indexOf(userAns);
+                if (userLetterIndex !== -1 && q.options[userLetterIndex] && String(q.options[userLetterIndex]).trim().toUpperCase() === c) {
+                    isCorrect = true;
+                }
+                
+                if (isCorrect) {
+                    subjectScores[q.subject].earned += (q.points || 1);
+                }
             }
         }
     });
