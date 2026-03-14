@@ -85,14 +85,14 @@ async function startExam() {
     loadingOverlay.querySelector('p').textContent = "Suallar 3 fənn üzrə paralel yaradılır (bu daha sürətlidir)...";
 
     try {
-        const difficultyText = "Sən Azərbaycan Respublikasının DİM (Dövlət İmtahan Mərkəzi) üzrə təcrübəli, illərin ali dərəcəli müəllimisən. Sən 10-cu siniflər üçün gerçək, məntiqli, şagirdi dərin düşünməyə vadar edəcək və tam 'Buraxılış Sınaq İmtahanı' (OTK) səviyyəsində suallar hazırlamalısan. Suallar əsla bəsit və ya birbaşa cavablı olmamalıdır! Hər bir sual DİM standartına uyğun, çaşdırıcı variantları olan (bəzən mətnləri analiz edən) formada yazılmalıdır. JSON sintaksisini qəti surətdə pozma. Diqqət: Çoxluq fərqi (\\) işarəsi istifadə etmə, yerinə (fərqi) və ya (-) yaz. Cütün içində cüt dırnaq qoyma.";
+        const difficultyText = "Sən Azərbaycan Respublikasının DİM (Dövlət İmtahan Mərkəzi) üzrə təcrübəli, illərin ali dərəcəli müəllimisən. Sən 10-cu siniflər üçün gerçək, məntiqli, şagirdi dərin düşünməyə vadar edəcək və tam 'Buraxılış Sınaq İmtahanı' (OTK) səviyyəsində suallar hazırlamalısan. Suallar əsla bəsit və ya birbaşa cavablı olmamalıdır! Hər bir sual DİM standartına uyğun, çaşdırıcı variantları olan (bəzən mətnləri analiz edən) formada yazılmalıdır. JSON sintaksisini qəti surətdə pozma. Diqqət: Çoxluq fərqi (\\) işarəsi istifadə etmə, yerinə (fərqi) və ya (-) yaz. Cütün içində cüt dırnaq qoyma. ƏN MÜHÜM QAYDA: Doğru cavabları yalnız A, B, C kimi sıralama. Variantları təmiz qarışdır, 'D' və 'E' bəndləri də mütəmadi şəkildə düzgün cavab olsun. A, B, C, D, E variantları bütün test boyunca təsadüfi (random) paylanmalıdır.";
         
         const promptAz = `Sən DİM Azərbaycan dili müəllimisən. 10-cu sinif buraxılış imtahanı üçün cəmi 28 fərqli sual (id 1-dən 28-ə) yarat. ${difficultyText}
 Şərt: 24 ədəd 'closed' (qapalı, 5 variantlı), 4 ədəd 'open_text' (yazılı açıq) sual olacaq. Orta və çətin suallar qarışıq olacaq.
 Önəmli Təlimat: İmtahanın ən çətin sualları üçün bax bu 1 mart 2026 OTK sınağı nümunələrindəki məntiqi (Frazeoloji antonimlik, Cümlə üzvlərinin təyinsizliyi, dərin Mətn Analizi) tətbiq et. Nümunə çətinliklər: 
 1. Frazeologiya: "Hansı cütlükdə frazeoloji birləşmələr eyni mənada işlənmir? (Məsələn: əl-ələ vermək – əl sıxmaq)".
 2. Təyinsizləşmə: "'İş təklif edənlərin etirazını qıra bilmirlər' cümləsində hansı sözlər təyinsizləşmiş isimlərdir?".
-Bu tipli ən az 3 detallaşdırılmış dərin məntiqi sual yarat. Mütləq 1 ədəd irihəcmli OXUYUB ANLAMA (Reading) mətni ver və o mətnə aid 3-4 məntiqi sual qur (Məsələn, Mətndəki personajın gizli xarakterini tapan). Qalanları isə yaxşı oxuyanların yazacağı Orta Səviyyə olsun.
+Bu tipli ən az 3 detallaşdırılmış dərin məntiqi sual yarat. Mütləq 1 ədəd irihəcmli OXUYUB ANLAMA (Reading) mətni ver və o mətnə aid 3-4 məntiqi sual qur (Məsələn, Mətndəki personajın gizli xarakterini tapan). Qalanları isə yaxşı oxuyanların yazacağı Orta Səviyyə olsun. İmtahan boyunca A, B, C, D, E-ni düzgün cavab olaraq payla.
 CAVABIN YALNIZ VƏ YALNIZ JSON ARRAY FORMATINDA OLSUN. MƏTNLƏRİ \`text\` daxilində tam, qaçış simvolları nizamlanmış yaz.
 Qapalı nümunə: {"id": 1, "subject": "Azərbaycan dili", "type": "closed", "text": "...", "options": ["A", "B", "C", "D", "E"], "correct": "C", "points": 1}
 Açıq nümunə: {"id": 25, "subject": "Azərbaycan dili", "type": "open_text", "text": "...", "points": 2}`;
@@ -103,7 +103,7 @@ Statistika: 13 dənə 'closed' (5 variantlı), 5 dənə 'open_text' (kodlaşdır
 1. Modul tənliyi: Məsələn, "|x - 2| > x + 3 həllini tapın." tipli qrafik və xassə tələb edən.
 2. Funksiya minimumları: Məsələn, "f(x) = x² - 4x + 3 funksiyasının minimum nöqtəsində qiyməti nə qədərdir?" tipli diskriminant/vertex məsələləri.
 3. Həndəsə: Məsələn, "Bir üçbucaqda bucaqlar nisbəti 2:3:4-dür. Ən böyük bucaq neçə dərəcədir? (Cavab 96)".
-Bu tipli sualları mütləq daxil et! Qalanları orta səviyyə (nisbət/proqressiya/köklər) olsun.
+Bu tipli sualları mütləq daxil et! Qalanları orta səviyyə (nisbət/proqressiya/köklər) olsun. DOĞRU CAVABLAR MÜTLƏQ QARIŞIQ (A, B, C, D, E bərabər) OLMALIDIR. D və E-ni xüsusilə çox sal!
 CAVABIN YALNIZ VƏ YALNIZ JSON ARRAY FORMATINDA OLSUN.
 Closed nümunəsi: {"id": 29, "subject": "Riyaziyyat", "type": "closed", "text": "...", "options": ["A", "B", "C", "D", "E"], "correct": "A", "points": 1}
 Open Solution nümunəsi: {"id": 47, "subject": "Riyaziyyat", "type": "open_solution", "text": "...", "points": 4}`;
@@ -116,6 +116,7 @@ CRITICAL INSTRUCTION: Include these highly tricked, advanced OTK-style questions
 2. Hard Reported Speech backshifts: e.g., "He said: 'I will help you tomorrow.' → Reported: He said that he _____ me the next day. (B: would help)".
 3. Phrasal Verbs/Idioms: e.g., "The workers couldn’t break _____ the employers’ objections. (C: through)".
 Mix these extremely hard types with standard medium ones (Nouns, Quantifiers) so the general audience gets 70-85, but top students struggle on these.
+CRUCIAL: Distribute correct answers completely randomly across A, B, C, D, and E! Force D and E to be correct frequently to avoid ABC clustering!
 RESPOND ONLY AS A VALID JSON ARRAY. NO MARKDOWN TEXT AROUND IT.
 Closed example: {"id": 54, "subject": "İngilis dili", "type": "closed", "text": "...", "options": ["A", "B", "C", "D", "E"], "correct": "B", "points": 1}
 Open Text example: {"id": 78, "subject": "İngilis dili", "type": "open_text", "text": "...", "points": 2}`;
